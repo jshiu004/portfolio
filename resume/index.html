@@ -3,17 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Resume</title>
-    <h1>My Resume</h1>
+    <title>Justin Shiu | Resume</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
-<body> 
-    <nav>
+<body class="resume-page">
+    <nav aria-label="Main navigation">
         <a href="../index.html">Home</a>
         <a href="../projects/index.html">Projects</a>
         <a href="../contact/index.html">Contact</a>
-        <a href="https://github.com/jshiu004" target="_blank">GitHub</a>
-        <a href="../resume/index.html">Resume</a>
-    </nav> 
-    <img src="../images/resume.png" alt="Justin Shiu's resume" width="600">  
+        <a href="https://github.com/jshiu004" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="index.html" aria-current="page">Resume</a>
+    </nav>
+
+    <main>
+        <header class="resume-intro">
+            <h1>Justin Shiu</h1>
+        </header>
+
+        <section aria-labelledby="education-heading">
+            <h2 id="education-heading">Education</h2>
+            <article>
+                <header class="resume-entry-header">
+                    <div>
+                        <h3>University of California, San Diego</h3>
+                        <p>Bachelor of Science in Data Science &mdash; GPA: 3.96/4.0</p>
+                    </div>
+                    <p><span>La Jolla, CA</span><br><time datetime="2027-06">Expected June 2027</time></p>
+                </header>
+                <ul>
+                    <li><strong>Relevant coursework:</strong> Data Structures and Algorithms, Machine Learning, Database Systems, Software Construction, Probability and Statistics, Distributed and Scalable Systems, and Optimization Methods.</li>
+                    <li><strong>Honors:</strong> Chancellor&rsquo;s Honor List (2023&ndash;2025) and Dean&rsquo;s Honor List (all quarters).</li>
+                    <li><strong>Certification:</strong> Google Data Analytics Professional Certificate (Coursera), <time datetime="2024">2024</time>.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section aria-labelledby="experience-heading">
+            <h2 id="experience-heading">Experience</h2>
+
+            <article>
+                <header class="resume-entry-header">
+                    <div>
+                        <h3>Software Engineer Intern</h3>
+                        <p>Visa Inc.</p>
+                    </div>
+                    <p><time datetime="2026-06">June 2026</time> &ndash; <time datetime="2026-08">August 2026</time><br><span>Foster City, CA</span></p>
+                </header>
+                <ul>
+                    <li>Built and deployed a team-wide, full-stack SRE platform for Visa Intelligent Commerce using TypeScript, Node.js, React, and Electron.</li>
+                    <li>Built React and React Flow dashboards to visualize API latency, throughput, and transaction flows across payment services.</li>
+                    <li>Enhanced an HTTP-based MCP gateway for ClickHouse telemetry ingestion and optimized parsing before local SQLite storage.</li>
+                    <li>Tuned anomaly-detection rules for HTTP errors, latency, throughput, and TPS to improve alert quality and reduce noise.</li>
+                    <li>Orchestrated LLM-powered MCP/RAG agents for anomaly correlation, root-cause analysis, remediation recommendations, and RCA evidence review.</li>
+                    <li>Generated complete root-cause-analysis reports in under one minute after anomaly notifications.</li>
+                </ul>
+            </article>
+
+            <article>
+                <header class="resume-entry-header">
+                    <div>
+                        <h3>Data Science &amp; Machine Learning Developer</h3>
+                        <p>Association for Computing Machinery (ACM)</p>
+                    </div>
+                    <p><time datetime="2025-04">April 2025</time> &ndash; Present<br><span>La Jolla, CA</span></p>
+                </header>
+                <ul>
+                    <li>Built an item-based movie recommender in Python using 100,836 MovieLens ratings across 9,742 movies.</li>
+                    <li>Constructed user-item ratings and item-item cosine-similarity matrices for collaborative filtering.</li>
+                    <li>Cleaned and merged ratings, movie, tag, and link datasets with Pandas for analysis.</li>
+                    <li>Developed top-N ranking logic that excluded previously rated movies and weighted item similarity by users&rsquo; 4+ star preferences.</li>
+                    <li>Evaluated held-out recommendations with Precision@10, Recall@10, and NDCG.</li>
+                </ul>
+            </article>
+
+            <article>
+                <header class="resume-entry-header">
+                    <div>
+                        <h3>Youth Coding Instructor</h3>
+                        <p>Each1Teach1</p>
+                    </div>
+                    <p><time datetime="2023-06">June 2023</time> &ndash; <time datetime="2023-09">September 2023</time><br><span>San Francisco, CA</span></p>
+                </header>
+                <ul>
+                    <li>Mentored more than 40 youth ages 12&ndash;16 in Scratch, Python, and JavaScript, resulting in 50+ projects.</li>
+                    <li>Designed weekly lesson plans that provided structured progression in coding fundamentals and project development.</li>
+                    <li>Refined curriculum with five instructors, saving 15 hours per week through shared resources.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section aria-labelledby="projects-heading">
+            <h2 id="projects-heading">Projects</h2>
+
+            <article>
+                <header>
+                    <h3>Airport Database Management System</h3>
+                    <p>SQL, PostgreSQL, Java</p>
+                </header>
+                <ul>
+                    <li>Designed a normalized PostgreSQL schema from an ER diagram with 7+ entities and 15+ relationships.</li>
+                    <li>Implemented role-based access control for management, maintenance, customers, and pilots.</li>
+                    <li>Built Java database access logic for relational queries and updates, optimizing SQL queries and indexes to improve performance by 40%.</li>
+                    <li>Validated transactional workflows for flight scheduling, customer bookings, pilot assignments, and maintenance records.</li>
+                </ul>
+            </article>
+
+            <article>
+                <header>
+                    <h3>F1 Driver Performance Prediction Model</h3>
+                    <p>Python, Scikit-learn, Pandas, Matplotlib</p>
+                </header>
+                <ul>
+                    <li>Processed six Formula 1 seasons from <time datetime="2019">2019</time> through <time datetime="2024">2024</time> and performed exploratory and correlation analysis.</li>
+                    <li>Applied K-Means with elbow-method selection to segment drivers into three performance tiers.</li>
+                    <li>Collaborated on a KNN regressor using a 70/30 split and six features, selecting k = 3 with test R<sup>2</sup> of 0.63.</li>
+                </ul>
+            </article>
+
+            <article>
+                <header>
+                    <h3>Imposter Syndrome Data Science Project</h3>
+                    <p>Python, Pandas, Matplotlib, Statistics</p>
+                </header>
+                <ul>
+                    <li>Analyzed imposter syndrome survey data from four computer science classes with 200+ responses.</li>
+                    <li>Visualized patterns with Matplotlib and Seaborn and validated hypotheses using chi-square tests and Pearson correlation.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section aria-labelledby="skills-heading">
+            <h2 id="skills-heading">Technical Skills</h2>
+            <ul class="skills-list">
+                <li><strong>Languages:</strong> Python, TypeScript, Java, JavaScript, C++, SQL, R, HTML/CSS</li>
+                <li><strong>Frontend, Backend &amp; Tools:</strong> React, React Flow, Electron, Node.js, FastAPI, Git, Docker, AWS, Beautiful Soup</li>
+                <li><strong>Data Engineering &amp; Databases:</strong> Apache Airflow, Apache Spark, Dask, ClickHouse, PostgreSQL, MySQL, SQLite</li>
+                <li><strong>Machine Learning &amp; Agent Systems:</strong> PyTorch, Scikit-learn, Pandas, NumPy, Statsmodels, SciPy, Seaborn, Matplotlib, Model Context Protocol (MCP), Retrieval-Augmented Generation (RAG)</li>
+            </ul>
+        </section>
+    </main>
 </body>
 </html>

@@ -1,0 +1,74 @@
+[
+    {
+        "title": "Expository Visualization: Food Processing and Price",
+        "year": "2026",
+        "image": "../images/expository-visualization.png",
+        "description": "Designed an expository visualization using GroceryDB data to investigate how food processing relates to affordability. The analysis shows that ultra processed foods cost less per calorie but more by weight, challenging the common perception that processed foods are simply cheaper. The visualization uses median prices, normalized percentage differences, and NOVA processing classes to clearly communicate this contrast."
+    },
+    {
+        "title": "Airport Database Management System",
+        "year": "2025",
+        "image": "/images/airport-database.png",
+        "description": "Built a PostgreSQL airport database with role based access, Java query logic, and optimized indexing that improved performance by 40%."
+    },
+    {
+        "title": "F1 Driver Performance Prediction Model",
+        "year": "2025",
+        "image": "/images/f1-performance-model.png",
+        "description": "Analyzed six F1 seasons using clustering and KNN regression to segment driver performance and predict outcomes with an R-squared of 0.63."
+    },
+    {
+        "title": "Imposter Syndrome Analysis",
+        "year": "2024",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Analyzed student survey data in Python to explore relationships between imposter syndrome, coding confidence, and academic characteristics using statistical tests and interactive visualizations."
+    },
+    {
+        "title": "Hawaii Google Reviews Analysis",
+        "year": "2025",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Explored how ratings, location, and restaurant characteristics relate to food prices across Hawaii using Google Maps data, interactive visualizations, hypothesis testing, and a random forest prediction model."
+    },
+    {
+        "title": "Movie Recommendation System",
+        "year": "2025",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Built a personalized movie recommendation system in Python using item based collaborative filtering and cosine similarity to suggest movies based on users’ ratings and preferences."
+    },
+    {
+        "title": "Illo perferendis iure asperiores!",
+        "year": "2024",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Consequuntur tenetur pariatur quaerat dolor cum dicta? Ex autem incidunt architecto perspiciatis dolorem optio, officia impedit pariatur inventore magni assumenda asperiores quae quisquam saepe nobis nihil aspernatur quibusdam recusandae ipsam."
+    },
+    {
+        "title": "Quia aliquid voluptatum nostrum.",
+        "year": "2024",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Dignissimos quod commodi molestias, magnam nihil beatae architecto dolorem quia, optio id, doloribus officiis obcaecati aut maiores veritatis nostrum alias qui itaque sequi consequatur ipsa amet ab assumenda tenetur. Iste?"
+    },
+    {
+        "title": "Veniam adipisci dignissimos rerum.",
+        "year": "2024",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Quam eveniet assumenda delectus nostrum, fuga iure consequatur vitae cum eligendi aliquam culpa eius pariatur dolores nobis. Eos eaque mollitia explicabo, quas dolorum et tempore doloribus magni, quo officia sit."
+    },
+    {
+        "title": "Nostrum quaerat aspernatur eos?",
+        "year": "2024",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Facilis animi, reiciendis nobis perspiciatis accusamus tenetur cumque pariatur, sequi optio officiis blanditiis vel eius hic assumenda modi, saepe voluptatibus nemo dolore sapiente laudantium. Deserunt sint culpa consectetur ea sapiente!"
+    },
+    {
+        "title": "Explicabo adipisci in placeat!",
+        "year": "2024",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Omnis voluptatibus repudiandae voluptatem distinctio est excepturi recusandae commodi, soluta culpa, odio maiores quisquam architecto autem rem porro non nisi eaque iste voluptates dignissimos, quasi doloremque quas similique. Esse, fugiat."
+    },
+    {
+        "title": "Excepturi quaerat praesentium deleniti.",
+        "year": "2024",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Aliquam odit impedit tempore quos. Tenetur perferendis quo mollitia nam quas accusamus eius modi ullam fuga nisi dolores praesentium obcaecati aliquam autem explicabo illo officiis, repellendus in natus atque cupiditate."
+    }
+]

@@ -85,6 +85,11 @@ textarea {
   margin: 0;
 }
 
+.projects .project-year {
+  font-family: Baskerville, serif;
+  font-variant-numeric: oldstyle-nums;
+}
+
 h1 {
   font-size: 400%;
 }
@@ -176,3 +181,71 @@ html {
   min-width: 0;
   overflow-wrap: anywhere;
 }
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  flex-wrap: wrap;
+}
+
+.container > .searchBar {
+  flex: 0 0 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  margin-block-end: 2em;
+}
+
+#projects-pie-plot {
+  max-width: 20em;
+  margin-block: 2em;
+
+  overflow: visible;
+}
+
+.legend {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9em, 1fr));
+  gap: 1em;
+  list-style: none;
+  border: 1px solid color-mix(in oklch, canvastext, canvas 75%);
+  border-radius: 0.5em;
+  padding: 1em;
+  margin-block: 1em 2em;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.legend .swatch {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  background-color: var(--color);
+  border-radius: 0.2em;
+}
+
+&:has(path:hover) {
+  path:not(:hover) {
+    opacity: 0.5;
+  }
+}
+
+path {
+  transition: 300ms;
+  cursor: pointer;
+}
+
+.selected {
+  --color: oklch(60% 45% 0) !important;
+
+  &:is(path) {
+    fill: var(--color);
+  }
+}
+

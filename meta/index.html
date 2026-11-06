@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <h1>Meta</h1>
+    <p>Explore the code behind this portfolio, including when commits were made and which languages they changed.</p>
+    <dl id="stats" class="stats"></dl>
+    <h2 id="chart-title">Commits by time of day</h2>
+    <p id="chart-description">Each dot is a commit, sized by its lines of code. Hover or focus on a dot for details. Drag across the chart to select commits; click an empty area or clear the selection to reset. Dates and times use your local time zone.</p>
+    <div id="chart"></div>
+    <div class="selection-summary">
+        <p id="selection-count" role="status">No commits selected</p>
+        <button id="clear-selection" type="button">Clear selection</button>
+    </div>
+    <h3>Languages in selected commits</h3>
+    <dl id="language-breakdown" class="stats"></dl>
+
+    <dl id="commit-tooltip" class="info tooltip" hidden>
+        <dt>Commit</dt>
+        <dd><a id="commit-link" target="_blank" rel="noopener noreferrer"></a></dd>
+        <dt>Date</dt>
+        <dd id="commit-date"></dd>
+        <dt>Time</dt>
+        <dd id="commit-time"></dd>
+        <dt>Author</dt>
+        <dd id="commit-author"></dd>
+        <dt>Lines edited</dt>
+        <dd id="commit-lines"></dd>
+    </dl>
+    <script type="module" src="../global.js"></script>
+    <script type="module" src="./main.js"></script>
+</body>
+</html>

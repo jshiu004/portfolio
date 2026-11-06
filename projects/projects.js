@@ -1,95 +1,75 @@
-import { fetchJSON, renderProjects } from '../global.js';
-import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
+import * as d3 from '../lib/d3.js';
+import { loadProjects } from '../lib/data.js';
+import { renderProjects } from '../lib/render.js';
 
-const projects = await fetchJSON('../lib/projects.json');
-
-const projectCount = projects.length;
-
-const projectsContainer = document.querySelector('.projects');
-
-renderProjects(projects, projectsContainer, 'h2');
-
-const projectsTitle = document.querySelector('.projects-title');
-
-projectsTitle.textContent = `My Projects (${projectCount})`;
-
-function renderPieChart(projectsGiven) {
-  let selectedIndex = -1;
-  let newRolledData = d3.rollups(
-    projectsGiven,
-    (v) => v.length,
-    (d) => d.year,
-  );
-  let newData = newRolledData.map(([year, count]) => {
-    return { value: count, label: year };
-  });
-  let newArcGenerator = d3.arc().innerRadius(0).outerRadius(50);
-  let newSliceGenerator = d3.pie().value((d) => d.value);
-  let newArcData = newSliceGenerator(newData);
-  let newArcs = newArcData.map((d) => newArcGenerator(d));
-  const colors = d3.scaleOrdinal(d3.schemeTableau10);
-  let newSVG = d3.select('svg');
-  newSVG.selectAll('path').remove();
-
+function initializeProjects(projects) {
+  const container = document.querySelector('.projects');
+  const searchInput = document.querySelector('.searchBar');
+  const chart = d3.select('#projects-pie-plot');
   const legend = d3.select('.legend');
-  legend.selectAll('li').remove();
+  const colors = d3.scaleOrdinal(d3.schemeTableau10)
+    .domain([...new Set(projects.map((d) => d.year))]);
+  const arc = d3.arc().innerRadius(0).outerRadius(50);
+  const pie = d3.pie().value((d) => d.value);
+  let visibleProjects = projects;
+  let selectedYear = null;
 
-  newArcs.forEach((arc, i) => {
-    newSVG
-      .append('path')
+  document.querySelector('.projects-title').textContent = `My Projects (${projects.length})`;
+
+  function renderSelection() {
+    const selectedProjects = selectedYear === null
+      ? visibleProjects
+      : visibleProjects.filter((project) => project.year === selectedYear);
+    renderProjects(selectedProjects, container);
+    chart.selectAll('path').classed('selected', (d) => d.data.label === selectedYear);
+    legend.selectAll('li').classed('selected', (d) => d.label === selectedYear);
+  }
+
+  function renderPieChart() {
+    const yearData = d3.rollups(visibleProjects, (group) => group.length, (d) => d.year)
+      .map(([label, value]) => ({ label, value }));
+
+    chart.selectAll('path')
+      .data(pie(yearData), (d) => d.data.label)
+      .join('path')
       .attr('d', arc)
-      .attr('fill', colors(i))
-      .on('click', () => {
-        selectedIndex = selectedIndex === i ? -1 : i;
-
-        newSVG
-          .selectAll('path')
-          .attr('class', (_, idx) => (
-            idx === selectedIndex ? 'selected' : ''
-          ));
-
-        legend
-          .selectAll('li')
-          .attr('class', (_, idx) => (
-            idx === selectedIndex ? 'legend-item selected' : 'legend-item'
-          ));
-
-        if (selectedIndex === -1) {
-          renderProjects(projects, projectsContainer, 'h2');
-        } else {
-          const filteredProjects = projects.filter((project) => project.year === newData[selectedIndex].label);
-          renderProjects(filteredProjects, projectsContainer, 'h2');
-        }
+      .attr('fill', (d) => colors(d.data.label))
+      .on('click', (event, d) => {
+        selectedYear = selectedYear === d.data.label ? null : d.data.label;
+        renderSelection();
       });
-  });
 
-  newData.forEach((d, idx) => {
-    legend
-      .append('li')
-      .attr('class', 'legend-item')
-      .attr('style', `--color:${colors(idx)}`)
-      .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
-  });
+    const items = legend.selectAll('li')
+      .data(yearData, (d) => d.label)
+      .join((enter) => {
+        const item = enter.append('li').attr('class', 'legend-item');
+        item.append('span').attr('class', 'swatch');
+        item.append('span').attr('class', 'legend-label');
+        item.append('em');
+        return item;
+      })
+      .style('--color', (d) => colors(d.label));
+    items.select('.legend-label').text((d) => d.label);
+    items.select('em').text((d) => `(${d.value})`);
+  }
+
+  function updateSearch() {
+    const query = searchInput.value.toLowerCase();
+    visibleProjects = projects.filter((project) =>
+      Object.values(project).join('\n').toLowerCase().includes(query),
+    );
+    selectedYear = null;
+    renderPieChart();
+    renderSelection();
+  }
+
+  searchInput.addEventListener('input', updateSearch);
+  updateSearch();
 }
 
-renderPieChart(projects);
-
-let query = '';
-
-let searchInput = document.querySelector('.searchBar');
-
-function setQuery(value) {
-  query = value;
-
-  return projects.filter((project) => {
-    let values = Object.values(project).join('\n').toLowerCase();
-    return values.includes(query.toLowerCase());
-  });
+try {
+  initializeProjects(await loadProjects());
+} catch (error) {
+  document.querySelector('.projects').textContent = 'Unable to load projects. Please try reloading the page.';
+  console.error('Unable to load projects:', error);
 }
-
-searchInput.addEventListener('input', (event) => {
-  let filteredProjects = setQuery(event.target.value);
-  renderProjects(filteredProjects, projectsContainer, 'h2');
-  renderPieChart(filteredProjects);
-});
-

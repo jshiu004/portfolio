@@ -1,130 +1,75 @@
-console.log('IT’S ALIVE!');
+import { GITHUB_URL, SITE_ROOT } from './lib/site.js';
 
-function $$(selector, context = document) {
-  return Array.from(context.querySelectorAll(selector));
+function renderNavigation() {
+  const pages = [
+    { url: '', title: 'Home' },
+    { url: 'projects/', title: 'Projects' },
+    { url: 'contact/', title: 'Contact' },
+    { url: GITHUB_URL, title: 'GitHub' },
+    { url: 'meta/', title: 'Meta' },
+    { url: 'resume/', title: 'Resume' },
+  ];
+  const nav = document.createElement('nav');
+  nav.setAttribute('aria-label', 'Main navigation');
+  const currentPath = location.pathname.replace(/index\.html$/, '');
+
+  for (const { url, title } of pages) {
+    const link = document.createElement('a');
+    link.href = new URL(url, SITE_ROOT);
+    link.textContent = title;
+
+    if (link.host === location.host && link.pathname === currentPath) {
+      link.classList.add('current');
+      link.setAttribute('aria-current', 'page');
+    }
+    if (link.host !== location.host) {
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    }
+    nav.append(link);
+  }
+  document.body.prepend(nav);
 }
 
-// navLinks = $$('nav a');
+function initializeTheme() {
+  const label = document.createElement('label');
+  label.className = 'color-scheme';
+  label.append('Theme: ');
+  const select = document.createElement('select');
+  for (const [value, text] of [
+    ['light dark', 'Automatic'],
+    ['light', 'Light'],
+    ['dark', 'Dark'],
+  ]) {
+    select.add(new Option(text, value));
+  }
+  label.append(select);
+  document.body.prepend(label);
 
-// let currentLink = navLinks.find(
-//     (a) => a.host === location.host && a.pathname === location.pathname,
-// );
-
-// currentLink?.classList.add('current');
-
-const BASE_Path = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-    ? "/"
-    : "/portfolio/";
-
-let pages = [
-    {url: '', title: 'Home' },
-    {url: 'projects/', title: 'Projects'},
-    {url: 'contact/', title: 'Contact'},
-    {url: 'https://github.com/jshiu004', title: 'GitHub'},
-    {url: 'resume/', title: 'Resume'},
-]
-
-let nav = document.createElement('nav');
-document.body.prepend(nav);
-
-for (let p of pages) {
-    let url = p.url;
-
-    if(!url.startsWith('http')) {
-        url = BASE_Path + url;
-    }
-
-    let title = p.title;
-    
-    let a = document.createElement('a');
-    a.href = url;
-    a.textContent = title;
-    nav.append(a);
-
-    if (a.host === location.host && a.pathname === location.pathname) {
-        a.classList.add('current');
-    }
-
-    if(a.host !== location.host) {
-        a.target = '_blank';
-    }
-}
-
-document.body.insertAdjacentHTML(
-    'afterbegin',
-    `<label class="color-scheme">
-        Theme:
-        <select>
-            <option value="light dark">Automatic</option>
-            <option value="light">Light</option>
-            <option value="dark">Dark</option>
-        </select>
-    </label>`,
-);
-
-const select = document.querySelector('.color-scheme select');
-
-select.addEventListener('input', function(event) {
-    console.log('color scheme changes to', event.target.value);
-    document.documentElement.style.setProperty('color-scheme', event.target.value);
-    localStorage.colorScheme = event.target.value;
-});
-
-if('colorScheme' in localStorage) {
-    document.documentElement.style.setProperty('color-scheme', localStorage.colorScheme);
-    select.value = localStorage.colorScheme;
-}
-
-const form = document.querySelector('form');
-
-form?.addEventListener('submit', function (event) {
-  event.preventDefault();
-
-  const data = new FormData(form);
-  let url = form.action + '?';
-
-  for (let [name, value] of data) {
-    url += `${name}=${encodeURIComponent(value)}&`;
+  function applyTheme(value) {
+    document.documentElement.style.setProperty('color-scheme', value);
+    select.value = value;
   }
 
-  location.href = url;
-});
-
-export async function fetchJSON(url) {
+  // Theme switching still works when browser storage is unavailable.
   try {
-    // Fetch the JSON file from the given URL
-    const response = await fetch(url);
-    if (!response.ok) {
-        throw new Error(`Failed to fetch projects: ${response.statusText}`);
+    const savedTheme = localStorage.getItem('colorScheme');
+    if (Array.from(select.options).some((option) => option.value === savedTheme)) {
+      applyTheme(savedTheme);
     }
-    const data = await response.json();
-    return data;
   } catch (error) {
-    console.error('Error fetching or parsing JSON data:', error);
+    console.warn('Unable to read the saved theme:', error);
   }
-}
 
-export function renderProjects(project, containerElement, headingLevel = 'h2') {
-
-    if (typeof headingLevel !== 'string' || !/^h[1-6]$/.test(headingLevel)) {
-        throw new RangeError('headingLevel must be h1 through h6');
-    } 
-    containerElement.innerHTML = '';
-    for (const currentProject of project) {
-        const article = document.createElement('article');
-        article.innerHTML = `
-        <${headingLevel}>${currentProject.title}</${headingLevel}>
-        <img src="${currentProject.image}" alt="${currentProject.title}">
-        <div>
-            <p>${currentProject.description}</p>
-            <p class="project-year">${currentProject.year}</p>
-        </div>
-        `;
-    containerElement.appendChild(article);
+  select.addEventListener('input', () => {
+    applyTheme(select.value);
+    try {
+      localStorage.setItem('colorScheme', select.value);
+    } catch (error) {
+      console.warn('Unable to save the theme:', error);
     }
-
+  });
 }
 
-export async function fetchGitHubData(username) {
-    return fetchJSON(`https://api.github.com/users/${username}`)
-}
+renderNavigation();
+initializeTheme();

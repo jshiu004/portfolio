@@ -2,19 +2,19 @@
     {
         "title": "Expository Visualization: Food Processing and Price",
         "year": "2026",
-        "image": "../images/expository-visualization.png",
+        "image": "images/expository-visualization.png",
         "description": "Designed an expository visualization using GroceryDB data to investigate how food processing relates to affordability. The analysis shows that ultra processed foods cost less per calorie but more by weight, challenging the common perception that processed foods are simply cheaper. The visualization uses median prices, normalized percentage differences, and NOVA processing classes to clearly communicate this contrast."
     },
     {
         "title": "Airport Database Management System",
         "year": "2025",
-        "image": "/images/airport-database.png",
+        "image": "images/airport-database.png",
         "description": "Built a PostgreSQL airport database with role based access, Java query logic, and optimized indexing that improved performance by 40%."
     },
     {
         "title": "F1 Driver Performance Prediction Model",
         "year": "2025",
-        "image": "/images/f1-performance-model.png",
+        "image": "images/f1-performance-model.png",
         "description": "Analyzed six F1 seasons using clustering and KNN regression to segment driver performance and predict outcomes with an R-squared of 0.63."
     },
     {

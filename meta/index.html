@@ -6,17 +6,14 @@
     <title>Meta</title>
     <link rel="stylesheet" href="../style.css">
 </head>
-<body>
+<body class="meta-page">
     <h1>Meta</h1>
     <p>Explore the code behind this portfolio, including when commits were made and which languages they changed.</p>
-    <dl id="stats" class="stats"></dl>
+    <div id="stats"></div>
     <h2 id="chart-title">Commits by time of day</h2>
-    <p id="chart-description">Each dot is a commit, sized by its lines of code. Hover or focus on a dot for details. Drag across the chart to select commits; click an empty area or clear the selection to reset. Dates and times use your local time zone.</p>
+    <p id="chart-description">Each dot is a commit, sized by its lines of code. Hover over a dot for details. Drag a rectangle from an empty area of the chart to select commits and see their language breakdown. Click an empty area to clear the selection. Dates and times use your local time zone.</p>
     <div id="chart"></div>
-    <div class="selection-summary">
-        <p id="selection-count" role="status">No commits selected</p>
-        <button id="clear-selection" type="button">Clear selection</button>
-    </div>
+    <p id="selection-count">No commits selected</p>
     <h3>Languages in selected commits</h3>
     <dl id="language-breakdown" class="stats"></dl>
 

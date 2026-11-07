@@ -206,6 +206,18 @@ textarea {
   font-weight: 400;
 }
 
+.meta-page .stats {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.meta-page .stats dt {
+  grid-row: 1;
+}
+
+.meta-page .stats dd {
+  grid-row: 2;
+}
+
 .resume-page section > h2 {
   border-bottom: 2px solid currentColor;
 }
@@ -260,18 +272,13 @@ textarea {
 }
 
 #chart .dots circle {
-  fill: steelblue;
-  fill-opacity: 0.7;
-  transition: transform 200ms, fill-opacity 200ms, fill 200ms;
+  transition: 200ms;
   transform-origin: center;
   transform-box: fill-box;
 }
 
-#chart .dots circle:is(:hover, :focus-visible) {
+#chart .dots circle:hover {
   transform: scale(1.5);
-  fill-opacity: 1;
-  stroke: canvastext;
-  stroke-width: 1;
 }
 
 #chart .dots circle.selected {
@@ -283,13 +290,15 @@ dl.info {
   grid-template-columns: auto 1fr;
   gap: 0.4rem 1rem;
   margin: 0;
-  transition: opacity 200ms, visibility 200ms;
+  transition-duration: 500ms;
+  transition-property: opacity, visibility;
 }
 
 .tooltip {
   position: fixed;
   top: 1em;
   left: 1em;
+  translate: 12px 12px;
   z-index: 10;
   box-sizing: border-box;
   max-width: min(28rem, calc(100vw - 24px));
@@ -307,33 +316,32 @@ dl.info[hidden]:not(:hover, :focus-within) {
   pointer-events: none;
 }
 
-.selection-summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
 @keyframes marching-ants {
   to { stroke-dashoffset: -8; }
 }
 
-#chart .brush .selection {
-  fill: var(--color-accent);
+#chart .selection {
   fill-opacity: 0.1;
-  stroke: canvastext;
+  stroke: black;
   stroke-opacity: 0.7;
   stroke-dasharray: 5 3;
   animation: marching-ants 2s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  #chart .brush .selection { animation: none; }
+  #chart .selection { animation: none; }
   #chart .dots circle, dl.info { transition: none; }
 }
 
 @media (max-width: 40rem) {
+  .meta-page .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .meta-page .stats dt, .meta-page .stats dd {
+    grid-row: auto;
+  }
+
   nav a {
     flex-basis: calc(33.333% - 1rem);
   }

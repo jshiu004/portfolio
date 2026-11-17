@@ -218,6 +218,26 @@ textarea {
   grid-row: 2;
 }
 
+#commit-filter {
+  display: flex;
+  align-items: baseline;
+}
+
+#commit-filter label {
+  display: flex;
+  flex: 1;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+#commit-progress {
+  flex: 1;
+}
+
+#commit-time {
+  margin-left: auto;
+}
+
 .resume-page section > h2 {
   border-bottom: 2px solid currentColor;
 }
@@ -275,6 +295,10 @@ textarea {
   transition: 200ms;
   transform-origin: center;
   transform-box: fill-box;
+
+  @starting-style {
+    r: 0;
+  }
 }
 
 #chart .dots circle:hover {

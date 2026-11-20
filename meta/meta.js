@@ -354,7 +354,7 @@ function onTimeSliderChange() {
 document.getElementById('commit-progress').addEventListener('input', onTimeSliderChange);
 onTimeSliderChange();
 
-d3.select('#scatter-story')
+d3.selectAll('#scatter-story, #files-story')
   .selectAll('.step')
   .data(commits)
   .join('div')
@@ -389,7 +389,6 @@ function onStepEnter(response) {
   });
   filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
   updateScatterPlot(data, filteredCommits);
-  updateFileDisplay(filteredCommits);
 }
 
 const scroller = scrollama();
@@ -399,3 +398,17 @@ scroller
     step: '#scrolly-1 .step',
   })
   .onStepEnter(onStepEnter);
+
+function onFileStepEnter(response) {
+  const fileMaxTime = response.element.__data__.datetime;
+  const fileCommits = commits.filter((d) => d.datetime <= fileMaxTime);
+  updateFileDisplay(fileCommits);
+}
+
+const fileScroller = scrollama();
+fileScroller
+  .setup({
+    container: '#scrolly-2',
+    step: '#scrolly-2 .step',
+  })
+  .onStepEnter(onFileStepEnter);

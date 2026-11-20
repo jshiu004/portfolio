@@ -418,7 +418,7 @@ dl.info[hidden]:not(:hover, :focus-within) {
   }
 }
 
-#scrolly-1 {
+#scrolly-1, #scrolly-2 {
   position: relative;
   display: flex;
   gap: 1rem;
@@ -428,11 +428,11 @@ dl.info[hidden]:not(:hover, :focus-within) {
   }
 }
 
-#scatter-story {
+#scatter-story, #files-story {
   position: relative;
 }
 
-#scatter-story .step {
+#scatter-story .step, #files-story .step {
   padding-bottom: 100vh;
 }
 
@@ -442,4 +442,13 @@ dl.info[hidden]:not(:hover, :focus-within) {
   left: 0;
   bottom: auto;
   height: 50vh;
+}
+
+#files-plot {
+  position: sticky;
+  top: 0;
+  left: 0;
+  bottom: auto;
+  height: 100vh;
+  overflow-y: auto;
 }

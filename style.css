@@ -432,6 +432,10 @@ dl.info[hidden]:not(:hover, :focus-within) {
   position: relative;
 }
 
+#scatter-story .step {
+  padding-bottom: 100vh;
+}
+
 #scatter-plot {
   position: sticky;
   top: 0;

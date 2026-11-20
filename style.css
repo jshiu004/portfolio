@@ -442,6 +442,9 @@ dl.info[hidden]:not(:hover, :focus-within) {
   left: 0;
   bottom: auto;
   height: 50vh;
+  min-height: min(38rem, 100vh);
+  max-height: 100vh;
+  overflow-y: auto;
 }
 
 #files-plot {
